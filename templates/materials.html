@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials Input</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="mt-5">Materials Input</h2>
+        <form action="/result" method="post">
+            <!-- Group 1: Copper -->
+            <h4>Group 1: Copper</h4>
+            <div class="form-group">
+                <label for="copper_type">Type:</label>
+                <select class="form-control form-control-sm" id="copper_type" name="copper_type" required>
+                    <!-- Options will be dynamically loaded -->
+                    {% for material in materials_data if material['Group'] == 1 %}
+                        <option value="{{  material['Type'] }}">{{ material['Type'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="copper_amount">Amount ({{ materials_data[0]['Unit'] }}):</label>
+                <input type="number" class="form-control form-control-sm" id="copper_amount" name="copper_amount" required>
+            </div>
+            <hr>
+            <!-- Group 2: Insulation -->
+            <h4>Group 2: Insulation</h4>
+            {% for material in materials_data if material['Group'] == 2 %}
+                <div class="form-group">
+                        <label for="{{ material }}">{{ material['Type'] }} ( {{ material['Unit']}} ):</label>
+                        <input type="number" class="form-control form-control-sm" id="{{ material }}" name="insulation[{{ material }}]">
+                    </div>
+                {% endfor %}
+            <hr>
+            <!-- Group 3: Reactor Materials -->
+                <h4>Group 3: Reactor Material</h4>
+                {% for material in materials_data if material['Group'] == 3 %}
+                <div class="form-group">
+                        <label for="{{ material }}">{{ material['Type'] }} ( {{ material['Unit']}} ):</label>
+                        <input type="number" class="form-control form-control-sm" id="{{ material }}" name="reactor_materials[{{ material }}]">
+                    </div>
+                {% endfor %}
+            <hr>
+             <!-- Group 4: Core Steel -->
+                <h4>Group 4: Core Steel</h4>
+                <div class="form-group">
+                    <label for="steel_type">Type:</label>
+                    <select class="form-control form-control-sm" id="steel_type" name="steel_type" required>
+                        <!-- Options will be dynamically loaded -->
+                        {% for material in materials_data if material['Group'] == 4 %}
+                            <option value="{{  material['Type'] }}">{{  material['Type'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                        <label for="steel_amount">Amount ({{materials_data[0]['Unit'] }}):</label>
+                        <input type="number" class="form-control form-control-sm" id="steel_amount" name="steel_amount" required>
+                </div>
+                <hr>
+            <!-- Group 5: Terminal Gear -->
+                <h4>Group 5: Terminal Gear</h4>
+                {% for material in materials_data if material['Group'] == 5 %}
+                <div class="form-group">
+                        <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit']}}):</label>
+                        <input type="number" class="form-control form-control-sm" id="{{ material }}" name="terminal_gear[{{ material }}]">
+                    </div>
+                {% endfor %}
+            <hr>
+            <!-- Group 6: TCA Conntrol -->
+                <h4>Group 6: TCA Control</h4>
+                {% for material in materials_data if material['Group'] == 6 %}
+                <div class="form-group">
+                        <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                        <input type="number" class="form-control form-control-sm" id="{{ material }}" name="tca_control[{{ material }}]">
+                    </div>
+                {% endfor %}
+            <hr>
+            <!-- Group 7:  -->
+                <h4>Group 7:</h4>
+                {% for material in materials_data if material['Group'] == 7 %}
+                <div class="form-group">
+                        <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit']}}):</label>
+                        <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g7[{{ material }}]">
+                    </div>
+                {% endfor %}
+            <hr>
+            <!-- Group 7:  -->
+            <h4>Group 8:</h4>
+            {% for material in materials_data if material['Group'] == 8 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g8[{{ material }}]">
+                </div>
+            {% endfor %}
+            <hr>
+            <!-- Group 9:  -->
+            <h4>Group 9:</h4>
+            {% for material in materials_data if material['Group'] == 2 %}
+            <div class="form-group">
+                <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g9[{{ material }}]">
+            </div>
+            {% endfor %}
+            <hr>
+            <!-- Group 10:  -->
+            <h4>Group 10:</h4>
+            {% for material in materials_data if material['Group'] == 10 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g10[{{ material }}]">
+                </div>
+            {% endfor %}
+            <hr>
+            <!-- Group 14:  -->
+                <h4>Group 14: Cooler Assembly</h4>
+                {% for material in materials_data if material['Group'] == 14 %}
+                <div class="form-group">
+                        <label for="{{ material }}">{{ material['Type'] }} ( {{ material['Unit'] }}):</label>
+                        <input type="number" class="form-control form-control-sm" id="{{ material }}" name="cooler_assy[{{ material }}]">
+                    </div>
+                {% endfor %}                        
+                <hr>
+            <!-- Group 16:  -->
+            <h4>Group 16: Fabrication Portion</h4>
+            {% for material in materials_data if material['Group'] == 16 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="fabrication[{{ material }}]">
+                </div>
+            {% endfor %}                        
+            <hr>
+            <!-- Group 17: -->
+            <h4>Group 17:</h4>
+            {% for material in materials_data if material['Group'] == 17 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g17[{{ material }}]">
+                </div>
+            {% endfor %}                        
+            <hr>
+            <!-- Group 18: -->
+            <h4>Group 18: Other Fittings(Inclusive)</h4>
+            {% for material in materials_data if material['Group'] == 18 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g18[{{ material }}]">
+                </div>
+            {% endfor %}                        
+            <hr>
+            <!-- Group 19: -->
+            <h4>Group 19: Other Fittings (Exclusive)</h4>
+            {% for material in materials_data if material['Group'] == 2 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g19[{{ material }}]">
+                </div>
+            {% endfor %}                        
+            <hr>
+            <!-- Group 20: -->
+            <h4>Group 20: Oil Loss</h4>
+            {% for material in materials_data if material['Group'] == 2 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g20[{{ material }}]">
+                </div>
+            {% endfor %}                        
+            <hr>
+            <!-- Group 20: -->
+            <h4>Group 21: Labour Cost</h4>
+            {% for material in materials_data if material['Group'] == 2 %}
+                <div class="form-group">
+                    <label for="{{ material }}">{{ material['Type'] }} ({{ material['Unit'] }}):</label>
+                    <input type="number" class="form-control form-control-sm" id="{{ material }}" name="_g21[{{ material }}]">
+                </div>
+            {% endfor %}  
+
+            <hr>
+
+            <button type="submit" class="btn btn-primary">Calculate Cost</button>
+        </form>
+    </div>
+</body>
+</html>
